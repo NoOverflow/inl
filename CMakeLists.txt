@@ -16,13 +16,6 @@ set(SOURCES ${SOURCES}
     "inl/src/Core/Socket.cpp"
 )
 
-# compile options
-set(compile_flags
-    _CRT_SECURE_NO_WARNINGS
-    GLM_FORCE_SILENT_WARNINGS
-    IGE_OPENGL
-)
-
 # static library
 add_library(inl STATIC ${SOURCES})
 target_include_directories(inl
@@ -41,3 +34,13 @@ target_compile_options(inl
         $<$<CXX_COMPILER_ID:MSVC>:/W4 /wd4103>
 )
 target_compile_definitions(inl PUBLIC ${compile_flags})
+
+if(${PROJECT_NAME} STREQUAL ${CMAKE_PROJECT_NAME})
+	option(INL_BUILD_EXAMPLES "If the examples should be built" ON)
+else()
+	option(INL_BUILD_EXAMPLES "If the examples should be built" OFF)
+endif()
+
+if(INL_BUILD_EXAMPLES)
+	add_subdirectory(examples)
+endif()
