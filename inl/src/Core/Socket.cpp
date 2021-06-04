@@ -1,10 +1,3 @@
-/*
-** EPITECH PROJECT, 2021
-** inl
-** File description:
-** $
-*/
-
 #include "Core/Socket.hpp"
 #include "Core/exceptions/InlCoreException.hpp"
 

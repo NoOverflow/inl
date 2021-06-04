@@ -1,10 +1,3 @@
-/*
-** EPITECH PROJECT, 2021
-** inl
-** File description:
-** InlCoreException
-*/
-
 #ifndef INLCOREEXCEPTION_HPP_
 #define INLCOREEXCEPTION_HPP_
 

@@ -1,10 +1,3 @@
-/*
-** EPITECH PROJECT, 2021
-** inl
-** File description:
-** Socket
-*/
-
 #ifndef SOCKET_HPP_
 #define SOCKET_HPP_
 
