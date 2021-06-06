@@ -1,29 +1,30 @@
 #ifndef SOCKET_HPP_
 #define SOCKET_HPP_
 
+#include <string>
+
 #ifdef WIN32
-    #pragma comment(lib, "ws2_32.lib")
-    #include <WinSock2.h>
-#elif defined (UNIX)
-    typedef int SOCKET; // Windows uses a typedef called SOCKET as well
-    #define INVALID_SOCKET -1
-    #define closesocket(s) close(s)
+#pragma comment(lib, "ws2_32.lib")
+#include <WinSock2.h>
+#elif defined(UNIX)
+typedef int SOCKET; // Windows uses a typedef called SOCKET as well
+#define INVALID_SOCKET -1
+#define closesocket(s) close(s)
 #else
-    #error INL is not supported on this platform
+#error INL is not supported on this platform
 #endif
 
 namespace inl {
 namespace core {
 
-enum SocketType {
-    TCP,
-    UDP
-};
+    enum SocketType { TCP, UDP };
 
-class Socket {
+    class Socket {
     public:
         Socket(SocketType type);
         ~Socket();
+
+        SOCKET get_internal_socket() const;
 
     protected:
     private:
@@ -34,8 +35,7 @@ class Socket {
         void init_wsa();
         void destroy_wsa();
 #endif
-
-};
+    };
 
 }
 }
