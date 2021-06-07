@@ -14,3 +14,4 @@ macro(package_add_example EXAMPLE_NAME)
 endmacro()
 
 package_add_example(socket socket.cpp)
+package_add_example(udp_server udp_server.cpp)
