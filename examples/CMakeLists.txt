@@ -15,3 +15,4 @@ endmacro()
 
 package_add_example(socket socket.cpp)
 package_add_example(udp_server udp_server.cpp)
+package_add_example(udp_client udp_client.cpp)
