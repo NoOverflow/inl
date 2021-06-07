@@ -13,9 +13,11 @@ endif()
 set(SOURCES ${SOURCES}
     "inl/include/Core/Socket.hpp"
     "inl/include/Core/Udp/UdpClient.hpp"
+    "inl/include/Core/Udp/UdpListener.hpp"
 
     "inl/src/Core/Socket.cpp"
     "inl/src/Core/Udp/UdpClient.cpp"
+    "inl/src/Core/Udp/UdpListener.cpp"
 )
 
 # static library
