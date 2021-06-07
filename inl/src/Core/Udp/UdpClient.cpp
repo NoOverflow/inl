@@ -40,6 +40,7 @@ namespace core {
         if (!hostinfo) {
             throw InlCoreException("Couldn't resolve given IP");
         }
+        m_destination = SOCKADDR_IN {};
         m_destination->sin_addr = *(IN_ADDR*)hostinfo->h_addr;
         m_destination->sin_port = htons(port);
         m_destination->sin_family = AF_INET;
