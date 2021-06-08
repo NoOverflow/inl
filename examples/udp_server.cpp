@@ -1,15 +1,10 @@
 #include <iostream>
+#include <cstring>
 
 #ifdef WIN32
 #pragma comment(lib, "ws2_32.lib")
 #include <WinSock2.h>
 #include <ws2tcpip.h>
-#elif defined(UNIX)
-typedef int SOCKET; // Windows uses a typedef called SOCKET as well
-#define INVALID_SOCKET -1
-#define closesocket(s) close(s)
-#else
-#error INL is not supported on this platform
 #endif
 
 #include "inl.hpp"

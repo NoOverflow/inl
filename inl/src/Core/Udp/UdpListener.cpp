@@ -5,16 +5,24 @@
 ** UdpListener
 */
 
+#include <cstring>
+
 #include "Core/Udp/UdpListener.hpp"
 #include "Core/exceptions/InlCoreException.hpp"
 
 #ifdef WIN32
 #pragma comment(lib, "ws2_32.lib")
 #include <WinSock2.h>
-#elif defined(UNIX)
+#elif __linux__
 typedef int SOCKET; // Windows uses a typedef called SOCKET as well
 #define INVALID_SOCKET -1
 #define closesocket(s) close(s)
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
+#include <unistd.h> /* close */
+#include <netdb.h> /* gethostbyname */
 #else
 #error INL is not supported on this platform
 #endif
@@ -49,7 +57,7 @@ namespace core {
         UdpPacket ret;
         int n = 0;
         int total_read = 0;
-        int len = sizeof(ret.addr);
+        socklen_t len = sizeof(ret.addr);
 
         ret.data = std::vector<char>(size);
         if ((n = recvfrom(

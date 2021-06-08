@@ -10,10 +10,16 @@
 #ifdef WIN32
 #pragma comment(lib, "ws2_32.lib")
 #include <WinSock2.h>
-#elif defined(UNIX)
+#elif __linux__
 typedef int SOCKET; // Windows uses a typedef called SOCKET as well
 #define INVALID_SOCKET -1
 #define closesocket(s) close(s)
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
+#include <unistd.h> /* close */
+#include <netdb.h> /* gethostbyname */
 #else
 #error INL is not supported on this platform
 #endif
@@ -63,7 +69,7 @@ namespace core {
     std::vector<char> UdpClient::recv(size_t len)
     {
         std::vector<char> buffer(len);
-        int slen;
+        socklen_t slen;
 
         if (!m_destination)
             throw InlCoreException("No destination given (You must call "
@@ -71,7 +77,7 @@ namespace core {
         slen = sizeof(m_destination.value());
         if ((recvfrom(
                 m_socket.get_internal_socket(), buffer.data(), len, 0,
-                (struct sockaddr*)&m_destination.value(), (int*)&slen))
+                (struct sockaddr*)&m_destination.value(), &slen))
             == -1) {
             throw InlCoreException("Error while receiving data");
         }
