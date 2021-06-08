@@ -6,10 +6,16 @@
 #ifdef WIN32
 #pragma comment(lib, "ws2_32.lib")
 #include <WinSock2.h>
-#elif defined(UNIX)
+#elif __linux__
 typedef int SOCKET; // Windows uses a typedef called SOCKET as well
 #define INVALID_SOCKET -1
 #define closesocket(s) close(s)
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
+#include <unistd.h> /* close */
+#include <netdb.h> /* gethostbyname */
 #else
 #error INL is not supported on this platform
 #endif
