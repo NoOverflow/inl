@@ -17,3 +17,5 @@ package_add_example(socket socket.cpp)
 package_add_example(udp_server udp_server.cpp)
 package_add_example(udp_client udp_client.cpp)
 package_add_example(tcp_server tcp_server.cpp)
+package_add_example(tcp_client tcp_client.cpp)
+
