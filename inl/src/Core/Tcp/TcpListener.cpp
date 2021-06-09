@@ -48,6 +48,19 @@ namespace core {
         }
     }
 
+    TcpListener::TcpListener(TcpListener&& other)
+        : m_internal_socket(std::move(other.m_internal_socket))
+    {
+        this->m_listening = other.m_listening;
+    }
+
+    TcpListener& TcpListener::operator=(TcpListener&& other)
+    {
+        this->m_internal_socket = std::move(other.m_internal_socket);
+        this->m_listening = other.m_listening;
+        return *this;
+    }
+
     TcpListener::~TcpListener()
     {
     }
@@ -74,6 +87,5 @@ namespace core {
         }
         return TcpClient(s, sin);
     }
-
 }
 }

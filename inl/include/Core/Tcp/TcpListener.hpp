@@ -17,10 +17,13 @@ namespace core {
     class TcpListener {
     public:
         TcpListener(unsigned short port);
+        TcpListener(TcpListener&&);
         ~TcpListener();
 
         void listen();
         TcpClient accept();
+
+        TcpListener& operator=(TcpListener&&);
 
     protected:
     private:
