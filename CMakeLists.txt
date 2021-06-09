@@ -14,10 +14,12 @@ set(SOURCES ${SOURCES}
     "inl/include/Core/Socket.hpp"
     "inl/include/Core/Udp/UdpClient.hpp"
     "inl/include/Core/Udp/UdpListener.hpp"
+    "inl/include/Core/Tcp/TcpClient.hpp"
 
     "inl/src/Core/Socket.cpp"
     "inl/src/Core/Udp/UdpClient.cpp"
     "inl/src/Core/Udp/UdpListener.cpp"
+    "inl/src/Core/Tcp/TcpClient.cpp"
 )
 
 # static library
