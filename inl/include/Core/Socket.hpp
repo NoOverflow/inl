@@ -10,12 +10,12 @@
 typedef int SOCKET; // Windows uses a typedef called SOCKET as well
 #define INVALID_SOCKET -1
 #define closesocket(s) close(s)
-#include <sys/types.h>
-#include <sys/socket.h>
-#include <netinet/in.h>
 #include <arpa/inet.h>
-#include <unistd.h> /* close */
 #include <netdb.h> /* gethostbyname */
+#include <netinet/in.h>
+#include <sys/socket.h>
+#include <sys/types.h>
+#include <unistd.h> /* close */
 #else
 #error INL is not supported on this platform
 #endif
@@ -28,14 +28,19 @@ namespace core {
     class Socket {
     public:
         Socket(SocketType type);
+        Socket(const Socket&) = delete;
+        Socket(Socket&&);
+        Socket(SOCKET raw_socket);
         ~Socket();
 
         SOCKET get_internal_socket() const;
 
+        Socket& operator=(Socket&&);
+
     protected:
     private:
         SOCKET m_internal_socket;
-
+        bool m_moved = false;
 #ifdef WIN32
         // This is only used for windows Socket library initialization
         void init_wsa();

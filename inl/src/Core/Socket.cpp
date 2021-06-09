@@ -16,12 +16,37 @@ namespace core {
         }
     }
 
+    Socket::Socket(Socket&& other)
+    {
+#ifdef WIN32
+        init_wsa();
+#endif
+        this->m_internal_socket = other.m_internal_socket;
+        other.m_moved = true;
+    }
+
+    Socket::Socket(SOCKET raw_socket)
+    {
+#ifdef WIN32
+        init_wsa();
+#endif
+        this->m_internal_socket = raw_socket;
+    }
+
     Socket::~Socket()
     {
 #ifdef WIN32
         destroy_wsa();
 #endif
-        closesocket(this->m_internal_socket);
+        if (!m_moved)
+            closesocket(this->m_internal_socket);
+    }
+
+    Socket& Socket::operator=(Socket&& other)
+    {
+        this->m_internal_socket = other.m_internal_socket;
+        other.m_moved = true;
+        return *this;
     }
 
     SOCKET Socket::get_internal_socket() const
