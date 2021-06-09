@@ -93,7 +93,6 @@ namespace core {
                 this->m_internal_socket.get_internal_socket(),
                 ret.data() + total_read, len - total_read, 0);
             if (n < 0) {
-                auto error = WSAGetLastError();
                 throw InlCoreException("Couldn't receive data");
             }
             total_read += n;

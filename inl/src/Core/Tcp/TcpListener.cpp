@@ -70,7 +70,6 @@ namespace core {
         s = ::accept(
             m_internal_socket.get_internal_socket(), (sockaddr*)&sin, &slen);
         if (s == INVALID_SOCKET) {
-            auto errror = WSAGetLastError();
             throw InlCoreException("Failed while accepting new client");
         }
         return TcpClient(s, sin);
