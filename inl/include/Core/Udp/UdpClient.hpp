@@ -14,12 +14,12 @@ typedef int SOCKET; // Windows uses a typedef called SOCKET as well
 typedef struct sockaddr_in SOCKADDR_IN;
 typedef struct sockaddr SOCKADDR;
 typedef struct in_addr IN_ADDR;
-#include <sys/types.h>
-#include <sys/socket.h>
-#include <netinet/in.h>
 #include <arpa/inet.h>
-#include <unistd.h> /* close */
 #include <netdb.h> /* gethostbyname */
+#include <netinet/in.h>
+#include <sys/socket.h>
+#include <sys/types.h>
+#include <unistd.h> /* close */
 #else
 #error INL is not supported on this platform
 #endif
