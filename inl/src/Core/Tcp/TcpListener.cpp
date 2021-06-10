@@ -5,26 +5,7 @@
 ** TcpListener
 */
 
-#ifdef WIN32
-#pragma comment(lib, "ws2_32.lib")
-#include <WinSock2.h>
-#elif __linux__
-typedef int SOCKET; // Windows uses a typedef called SOCKET as well
-#define INVALID_SOCKET -1
-#define closesocket(s) close(s)
-typedef struct sockaddr_in SOCKADDR_IN;
-typedef struct sockaddr SOCKADDR;
-typedef struct in_addr IN_ADDR;
-#include <arpa/inet.h>
-#include <netdb.h> /* gethostbyname */
-#include <netinet/in.h>
-#include <sys/socket.h>
-#include <sys/types.h>
-#include <unistd.h> /* close */
-#else
-#error INL is not supported on this platform
-#endif
-
+#include "cross_platform.hpp"
 #include "Core/Tcp/TcpClient.hpp"
 #include "Core/Tcp/TcpListener.hpp"
 #include "Core/exceptions/InlCoreException.hpp"
@@ -78,7 +59,7 @@ namespace core {
     {
         SOCKADDR_IN sin = { 0 };
         SOCKET s = 0;
-        int slen = sizeof(SOCKADDR_IN);
+        socklen_t slen = sizeof(SOCKADDR_IN);
 
         s = ::accept(
             m_internal_socket.get_internal_socket(), (sockaddr*)&sin, &slen);
