@@ -2,6 +2,7 @@
 #include <string>
 #include <thread>
 #include <vector>
+#include <cstring>
 
 #ifdef WIN32
 #pragma comment(lib, "ws2_32.lib")
