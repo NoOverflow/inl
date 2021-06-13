@@ -16,7 +16,9 @@ typedef int socklen_t;
 typedef int SOCKET; // Windows uses a typedef called SOCKET as well
 #define INVALID_SOCKET -1
 #define SOCKET_ERROR -1
-#define closesocket(s) close(s)
+#ifndef closesocket
+#define closesocket(s) ::close(s)
+#endif
 typedef struct sockaddr_in SOCKADDR_IN;
 typedef struct sockaddr SOCKADDR;
 typedef struct in_addr IN_ADDR;
