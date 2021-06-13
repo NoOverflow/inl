@@ -9,13 +9,15 @@
 #elif __linux__
 typedef int SOCKET; // Windows uses a typedef called SOCKET as well
 #define INVALID_SOCKET -1
-#define closesocket(s) close(s)
 #include <arpa/inet.h>
 #include <netdb.h> /* gethostbyname */
 #include <netinet/in.h>
 #include <sys/socket.h>
 #include <sys/types.h>
 #include <unistd.h> /* close */
+#ifndef closesocket
+#define closesocket(s) ::close(s)
+#endif
 #else
 #error INL is not supported on this platform
 #endif
