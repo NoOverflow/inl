@@ -22,6 +22,7 @@ namespace core {
 
         void listen();
         TcpClient accept();
+        void close();
 
         TcpListener& operator=(TcpListener&&);
 

@@ -37,13 +37,19 @@ namespace core {
 
     Socket::~Socket()
     {
-        if (!m_moved) {
-            shutdown(this->m_internal_socket, 2);
-            closesocket(this->m_internal_socket);
-        }
+        this->close();
 #ifdef WIN32
         destroy_wsa();
 #endif
+    }
+
+    void Socket::close()
+    {
+        if (m_moved || m_closed)
+            return;
+        shutdown(this->m_internal_socket, 2);
+        closesocket(this->m_internal_socket);
+        m_closed = true;
     }
 
     Socket& Socket::operator=(Socket&& other)

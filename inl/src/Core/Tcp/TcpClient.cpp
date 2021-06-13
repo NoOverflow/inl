@@ -35,6 +35,11 @@ namespace core {
     {
     }
 
+    void TcpClient::close()
+    {
+        this->m_internal_socket.close();
+    }
+
     TcpClient& TcpClient::operator=(TcpClient&& other)
     {
         this->m_internal_socket = std::move(other.m_internal_socket);

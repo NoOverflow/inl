@@ -50,6 +50,7 @@ namespace core {
         void send(const std::vector<char>& data);
         std::vector<char> recv(size_t len);
 
+        void close();
         TcpClient& operator=(TcpClient&&);
 
     protected:

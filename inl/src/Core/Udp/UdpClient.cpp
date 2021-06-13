@@ -40,6 +40,11 @@ namespace core {
     {
     }
 
+    void UdpClient::close()
+    {
+        m_socket.close();
+    }
+
     void UdpClient::set_destination(const std::string& ip, unsigned short port)
     {
         hostent* hostinfo = gethostbyname(ip.c_str());

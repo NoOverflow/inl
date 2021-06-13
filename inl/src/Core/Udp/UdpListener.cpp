@@ -53,6 +53,11 @@ namespace core {
     {
     }
 
+    void UdpListener::close()
+    {
+        this->m_internal_socket.close();
+    }
+
     UdpPacket UdpListener::recv(int size)
     {
         UdpPacket ret;

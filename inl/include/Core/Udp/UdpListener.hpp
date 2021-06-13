@@ -27,6 +27,8 @@ namespace core {
         UdpListener(unsigned short port);
         ~UdpListener();
 
+        void close();
+
         UdpPacket recv(int size);
         void
         send(const std::vector<char>& data, IN_ADDR addr, unsigned short port);

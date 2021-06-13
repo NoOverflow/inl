@@ -34,6 +34,7 @@ namespace core {
         ~Socket();
 
         SOCKET get_internal_socket() const;
+        void close();
 
         Socket& operator=(Socket&&);
 
@@ -41,6 +42,7 @@ namespace core {
     private:
         SOCKET m_internal_socket;
         bool m_moved = false;
+        bool m_closed = false;
 #ifdef WIN32
         // This is only used for windows Socket library initialization
         void init_wsa();

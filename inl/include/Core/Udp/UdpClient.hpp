@@ -34,6 +34,8 @@ namespace core {
         UdpClient();
         ~UdpClient();
 
+        void close();
+
         void set_destination(const std::string& ip, unsigned short port);
         void send(const std::vector<char>& data);
         std::vector<char> recv(size_t len);
