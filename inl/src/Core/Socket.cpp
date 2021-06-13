@@ -1,3 +1,5 @@
+#include <iostream>
+
 #include "Core/Socket.hpp"
 #include "Core/exceptions/InlCoreException.hpp"
 
@@ -35,11 +37,13 @@ namespace core {
 
     Socket::~Socket()
     {
+        if (!m_moved) {
+            shutdown(this->m_internal_socket, 2);
+            closesocket(this->m_internal_socket);
+        }
 #ifdef WIN32
         destroy_wsa();
 #endif
-        if (!m_moved)
-            closesocket(this->m_internal_socket);
     }
 
     Socket& Socket::operator=(Socket&& other)

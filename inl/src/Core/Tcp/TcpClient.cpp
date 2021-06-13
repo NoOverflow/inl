@@ -7,9 +7,9 @@
 
 #include <string>
 
-#include "cross_platform.hpp"
 #include "Core/Tcp/TcpClient.hpp"
 #include "Core/exceptions/InlCoreException.hpp"
+#include "cross_platform.hpp"
 
 namespace inl {
 namespace core {

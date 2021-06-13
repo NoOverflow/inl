@@ -8,7 +8,7 @@ using inl::core::TcpClient;
 
 int main()
 {
-    TcpClient client;
+    TcpClient client = std::move(TcpClient {});
     std::string line;
     std::vector<char> buffer;
 
@@ -17,6 +17,8 @@ int main()
     client.connect("127.0.0.1", 8080);
     while (!std::cin.eof()) {
         std::getline(std::cin, line);
+        if (line == "exit")
+            break;
         buffer.resize(2048);
         for (int i = 0; i < 2048; i++) {
             if (i <= line.size()) {
