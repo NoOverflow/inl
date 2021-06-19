@@ -81,7 +81,7 @@ namespace core {
             n = ::send(
                 this->m_internal_socket.get_internal_socket(),
                 data.data() + total_wrote, data.size() - total_wrote, 0);
-            if (n < 0) {
+            if (n <= 0) {
                 throw InlCoreException("Couldn't send data");
             }
             total_wrote += n;
@@ -98,7 +98,7 @@ namespace core {
             n = ::recv(
                 this->m_internal_socket.get_internal_socket(),
                 ret.data() + total_read, len - total_read, 0);
-            if (n < 0) {
+            if (n <= 0) {
                 throw InlCoreException("Couldn't receive data");
             }
             total_read += n;

@@ -50,7 +50,7 @@ namespace core {
                 m_socket.get_internal_socket(), data.data(), data.size(), 0,
                 (SOCKADDR*)&(m_destination.value()),
                 (int)sizeof(m_destination.value())))
-            < 0) {
+            <= 0) {
             throw InlCoreException("Error while sending data");
         }
     }
