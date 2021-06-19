@@ -80,7 +80,13 @@ namespace core {
         while (total_wrote != data.size()) {
             n = ::send(
                 this->m_internal_socket.get_internal_socket(),
-                data.data() + total_wrote, data.size() - total_wrote, 0);
+                data.data() + total_wrote, data.size() - total_wrote,
+#ifdef __linux__
+                MSG_NOSIGNAL
+#else
+                0
+#endif
+            );
             if (n <= 0) {
                 throw InlCoreException("Couldn't send data");
             }
