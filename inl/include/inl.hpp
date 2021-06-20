@@ -9,4 +9,6 @@
 #include "Core/Tcp/TcpClient.hpp"
 #include "Core/Tcp/TcpListener.hpp"
 
+#include "Utils/IpUtils.hpp"
+
 #endif /* !INL_HPP_ */

@@ -94,6 +94,11 @@ namespace core {
         }
     }
 
+    Socket& TcpClient::get_internal_socket()
+    {
+        return m_internal_socket;
+    }
+
     std::vector<char> TcpClient::recv(size_t len)
     {
         std::vector<char> ret(len);

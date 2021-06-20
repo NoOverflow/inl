@@ -33,6 +33,7 @@ namespace core {
 
         void close();
         TcpClient& operator=(TcpClient&&);
+        Socket& get_internal_socket();
 
     protected:
     private:

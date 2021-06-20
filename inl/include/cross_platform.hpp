@@ -11,6 +11,7 @@
 #ifdef WIN32
 #pragma comment(lib, "ws2_32.lib")
 #include <WinSock2.h>
+#include <ws2tcpip.h>
 typedef int socklen_t;
 #elif __linux__
 typedef int SOCKET; // Windows uses a typedef called SOCKET as well
