@@ -63,6 +63,5 @@ void IpUtils::destroy_wsa()
 {
     WSACleanup();
 }
-}
-
 #endif
+}
