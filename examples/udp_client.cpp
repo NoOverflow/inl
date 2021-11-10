@@ -7,7 +7,7 @@ using inl::core::UdpClient;
 
 int main()
 {
-    UdpClient client;
+    UdpClient client = std::move(UdpClient{});
     std::string line;
 
     std::cout << "[UDP Client] I will send what you type here to the server."
@@ -17,6 +17,8 @@ int main()
         std::vector<char> v;
 
         std::getline(std::cin, line);
+        if (std::cin.eof())
+            break;
         std::copy(line.begin(), line.end(), std::back_inserter(v));
         client.send(v);
     }

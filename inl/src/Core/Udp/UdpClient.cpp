@@ -23,6 +23,18 @@ namespace core {
     {
     }
 
+    UdpClient::UdpClient(UdpClient &&other)
+        : m_socket(std::move(other.m_socket))
+    {
+        *this = std::move(other);
+    }
+
+    UdpClient &UdpClient::operator=(UdpClient &&other)
+    {
+        this->m_destination = other.m_destination;
+        this->m_socket = std::move(other.m_socket);
+    }
+
     void UdpClient::close()
     {
         m_socket.close();

@@ -17,6 +17,7 @@ namespace core {
     class TcpListener {
     public:
         TcpListener(unsigned short port);
+        TcpListener(const TcpListener &) = delete;
         TcpListener(TcpListener&&);
         ~TcpListener();
 

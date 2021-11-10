@@ -32,6 +32,18 @@ namespace core {
         }
     }
 
+    UdpListener::UdpListener(UdpListener &&other)
+        : m_internal_socket(std::move(other.m_internal_socket))
+    {
+        *this = std::move(other);
+    }
+
+    UdpListener &UdpListener::operator=(UdpListener &&other)
+    {
+        this->m_internal_socket = std::move(other.m_internal_socket);
+        this->m_port = other.m_port;
+    }
+
     UdpListener::~UdpListener()
     {
     }
