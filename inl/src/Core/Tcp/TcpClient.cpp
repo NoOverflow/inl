@@ -99,6 +99,11 @@ namespace core {
         return m_internal_socket;
     }
 
+    std::optional<SOCKADDR_IN> TcpClient::to() const
+    {
+        return m_to;
+    }
+
     std::vector<char> TcpClient::recv(size_t len)
     {
         std::vector<char> ret(len);
