@@ -42,6 +42,7 @@ namespace core {
     {
         this->m_internal_socket = std::move(other.m_internal_socket);
         this->m_port = other.m_port;
+        return *this;
     }
 
     UdpListener::~UdpListener()

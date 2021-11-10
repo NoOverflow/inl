@@ -33,6 +33,7 @@ namespace core {
     {
         this->m_destination = other.m_destination;
         this->m_socket = std::move(other.m_socket);
+        return *this;
     }
 
     void UdpClient::close()
