@@ -14,31 +14,18 @@
 namespace inl {
 namespace core {
 
-    UdpListener::UdpListener(unsigned short port)
+    UdpListener::UdpListener()
         : m_internal_socket(SocketType::UDP)
     {
-        struct sockaddr_in si_me;
-
-        this->m_port = port;
-        memset((char*)&si_me, 0, sizeof(si_me));
-        si_me.sin_family = AF_INET;
-        si_me.sin_port = htons(port);
-        si_me.sin_addr.s_addr = htonl(INADDR_ANY);
-        if (bind(
-                this->m_internal_socket.get_internal_socket(),
-                (const sockaddr*)&si_me, sizeof(si_me))
-            == -1) {
-            throw("Couldn't bind UDP server to provided port.");
-        }
     }
 
-    UdpListener::UdpListener(UdpListener &&other)
+    UdpListener::UdpListener(UdpListener&& other)
         : m_internal_socket(std::move(other.m_internal_socket))
     {
         *this = std::move(other);
     }
 
-    UdpListener &UdpListener::operator=(UdpListener &&other)
+    UdpListener& UdpListener::operator=(UdpListener&& other)
     {
         this->m_internal_socket = std::move(other.m_internal_socket);
         this->m_port = other.m_port;
@@ -47,6 +34,23 @@ namespace core {
 
     UdpListener::~UdpListener()
     {
+    }
+
+    void UdpListener::bind(unsigned short port)
+    {
+        struct sockaddr_in si_me;
+
+        this->m_port = port;
+        memset((char*)&si_me, 0, sizeof(si_me));
+        si_me.sin_family = AF_INET;
+        si_me.sin_port = htons(port);
+        si_me.sin_addr.s_addr = htonl(INADDR_ANY);
+        if (::bind(
+                this->m_internal_socket.get_internal_socket(),
+                (const sockaddr*)&si_me, sizeof(si_me))
+            == -1) {
+            throw("Couldn't bind UDP server to provided port.");
+        }
     }
 
     void UdpListener::close()

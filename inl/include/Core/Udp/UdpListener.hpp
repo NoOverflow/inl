@@ -24,18 +24,20 @@ namespace core {
 
     class UdpListener {
     public:
-        UdpListener(unsigned short port);
+        UdpListener();
         UdpListener(const UdpListener&) = delete;
-        UdpListener(UdpListener &&);
+        UdpListener(UdpListener&&);
         ~UdpListener();
 
+        void bind(unsigned short port);
         void close();
 
         UdpPacket recv(int size);
         void
         send(const std::vector<char>& data, IN_ADDR addr, unsigned short port);
 
-        UdpListener &operator=(UdpListener &&);
+        UdpListener& operator=(UdpListener&&);
+
     protected:
     private:
         Socket m_internal_socket;
