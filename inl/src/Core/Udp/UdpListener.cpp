@@ -28,7 +28,7 @@ namespace core {
                 this->m_internal_socket.get_internal_socket(),
                 (const sockaddr*)&si_me, sizeof(si_me))
             == -1) {
-            throw("Couldn't bind UDP server to provided port.");
+            throw InlCoreException("Couldn't bind UDP server to provided port.");
         }
     }
 
@@ -47,6 +47,12 @@ namespace core {
 
     UdpListener::~UdpListener()
     {
+    }
+
+
+    Socket &UdpListener::socket()
+    {
+        return this->m_internal_socket;
     }
 
     void UdpListener::close()

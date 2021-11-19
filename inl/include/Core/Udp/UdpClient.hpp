@@ -23,6 +23,7 @@ namespace core {
         void send(const std::vector<char>& data);
         std::vector<char> recv(size_t len);
 
+        Socket &socket();
         UdpClient &operator=(UdpClient &&);
     protected:
     private:

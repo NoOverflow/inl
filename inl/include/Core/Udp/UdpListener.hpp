@@ -35,6 +35,7 @@ namespace core {
         void
         send(const std::vector<char>& data, IN_ADDR addr, unsigned short port);
 
+        Socket &socket();
         UdpListener &operator=(UdpListener &&);
     protected:
     private:

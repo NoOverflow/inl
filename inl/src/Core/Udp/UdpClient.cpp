@@ -99,5 +99,10 @@ namespace core {
         }
         return buffer;
     }
+
+    Socket &UdpClient::socket()
+    {
+        return this->m_socket;
+    }
 }
 }
