@@ -35,6 +35,8 @@ namespace core {
         TcpClient& operator=(TcpClient&&);
         Socket& get_internal_socket();
 
+        std::optional<SOCKADDR_IN> to() const;
+
     protected:
     private:
         Socket m_internal_socket;

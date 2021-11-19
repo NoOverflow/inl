@@ -24,11 +24,12 @@ namespace core {
 
     class UdpListener {
     public:
-        UdpListener(unsigned short port);
+        UdpListener();
         UdpListener(const UdpListener&) = delete;
-        UdpListener(UdpListener &&);
+        UdpListener(UdpListener&&);
         ~UdpListener();
 
+        void bind(unsigned short port);
         void close();
 
         UdpPacket recv(int size);

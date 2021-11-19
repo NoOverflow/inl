@@ -1,5 +1,5 @@
-#include <iostream>
 #include <cstring>
+#include <iostream>
 
 #ifdef WIN32
 #pragma comment(lib, "ws2_32.lib")
@@ -34,11 +34,12 @@ static char* get_ip_str(const struct sockaddr* sa, char* s, size_t maxlen)
 
 int main()
 {
-    UdpListener server(8080);
+    UdpListener server;
     UdpPacket packet;
     char str_data[PACKET_SIZE + 1] = { 0 };
     char ip[256] = { 0 };
 
+    server.bind(8080);
     std::cout << "Listening for incoming UDP packets. (You can use ncat -vv "
                  "localhost 8080 -u)"
               << std::endl;
