@@ -6,6 +6,7 @@
 */
 
 #include <vector>
+#include <stdexcept>
 
 #include "Core/Udp/UdpClient.hpp"
 #include "Core/exceptions/InlCoreException.hpp"
@@ -39,6 +40,19 @@ namespace core {
     void UdpClient::close()
     {
         m_socket.close();
+    }
+
+    void UdpClient::bind(ushort port)
+    {
+        sockaddr_in local = {};
+
+        local.sin_family = AF_INET;
+        local.sin_port = htons(port);
+        local.sin_addr.s_addr = INADDR_ANY;
+        if (::bind(m_socket.get_internal_socket(),
+            (sockaddr*)&local, sizeof(local)) == -1) {
+            throw InlCoreException("Couldn't bind to provided port.");
+        }
     }
 
     void UdpClient::set_destination(const std::string& ip, unsigned short port)
