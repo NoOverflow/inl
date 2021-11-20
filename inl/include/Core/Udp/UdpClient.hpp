@@ -13,21 +13,21 @@ namespace core {
     class UdpClient {
     public:
         UdpClient();
-        UdpClient(const UdpClient &) = delete;
-        UdpClient(UdpClient &&);
+        UdpClient(const UdpClient&) = delete;
+        UdpClient(UdpClient&&);
         ~UdpClient();
 
         void close();
-        void bind(ushort port);
+        void bind(unsigned short port);
         void set_destination(const std::string& ip, unsigned short port);
         void send(const std::vector<char>& data);
         std::vector<char> recv(size_t len);
 
-        Socket &socket();
-        UdpClient &operator=(UdpClient &&);
+        Socket& socket();
+        UdpClient& operator=(UdpClient&&);
+
     protected:
     private:
-
         Socket m_socket;
         std::optional<SOCKADDR_IN> m_destination = std::nullopt;
     };
