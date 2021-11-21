@@ -49,11 +49,12 @@ namespace core {
                 this->m_internal_socket.get_internal_socket(),
                 (const sockaddr*)&si_me, sizeof(si_me))
             == -1) {
-            throw("Couldn't bind UDP server to provided port.");
+            throw InlCoreException(
+                "Couldn't bind UDP server to provided port.");
         }
     }
-    
-    Socket &UdpListener::socket()
+
+    Socket& UdpListener::socket()
     {
         return this->m_internal_socket;
     }
@@ -76,7 +77,7 @@ namespace core {
                  ret.data.data() + total_read, size, 0,
                  (struct sockaddr*)&ret.addr, &len))
             == -1) {
-            throw("Couldn't receive UDP packet.");
+            throw InlCoreException("Couldn't receive UDP packet.");
         }
         ret.size = n;
         return ret;
@@ -95,7 +96,7 @@ namespace core {
                 this->m_internal_socket.get_internal_socket(), data.data(),
                 data.size(), 0, (const sockaddr*)&other, sizeof(other))
             == -1) {
-            throw("Couldn't send UDP packet.");
+            throw InlCoreException("Couldn't send UDP packet.");
         }
     }
 }
